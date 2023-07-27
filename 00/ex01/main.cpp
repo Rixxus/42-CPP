@@ -26,7 +26,6 @@ int main()
     string command;
     PhoneBook phonebook;
 
-
     // Startup
     cout << "LOADING..." << endl;
     cout << "PHONEBOOK READY" << endl;
@@ -50,7 +49,5 @@ int main()
         else{
             cout << "Invalid command. Please enter ADD, SEARCH or EXIT." << endl;
         }
-
     }   
-    
 }
