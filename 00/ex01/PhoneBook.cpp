@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PhoneBook.cpp                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rmount <marvin@42.fr>                      +#+  +:+       +#+        */
+/*   By: rmount <rmount@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/07/26 18:42:47 by rmount            #+#    #+#             */
-/*   Updated: 2023/07/27 23:06:51 by rmount           ###   ########.fr       */
+/*   Updated: 2023/07/28 15:04:46 by rmount           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ using std::cout;
 using std::cin;
 using std::endl;
 using std::getline;
+using std::isdigit;
 
 // Constructor and destructor
 PhoneBook::PhoneBook(){
@@ -60,7 +61,7 @@ void PhoneBook::add_contact(){
     new_contact.set_secret(secret);
     // Add the contact to the array
     contacts[oldest_contact_index] = new_contact;
-    cout << "Contacted added!" << endl;
+    cout << "Contact added!" << endl;
     oldest_contact_index++;
     if (number_of_contacts < 8){
         number_of_contacts++;
@@ -68,26 +69,38 @@ void PhoneBook::add_contact(){
 }
 
 void PhoneBook::search_contacts(){
+    string index;
+    char cindex;
     if (number_of_contacts == 0){
-        cout << "Sorry, there are no contacts yet." << endl;
+        cout << "\nSorry, there are no contacts yet." << endl;
         cout << "Please ADD a contact first." << endl;
         return ;
     }
-    print_table();
-    cout << "Please enter the contact number to view: " << endl;
-    cin >> display_index;
-    if (cin.fail()){
-        cout << "Error, input must be an number." << endl;
-        cin.clear();
-        cin.ignore();
-        return ;
+    print_table();  
+    cout << "Please enter the contact Index number to view: " << endl;
+    while (display_index < 1 || display_index > number_of_contacts){
+        getline(cin, index);
+        cindex = index[0];
+        index = cindex;
+        if (isdigit(cindex)){
+            if (stoi(index) > 0 && stoi(index) <= number_of_contacts)
+            {
+                display_index = stoi(index);
+                display_contact(display_index);
+            }
+            else {
+                cout << "Invalid contact Index." << endl;
+                print_table();  
+                cout << "Please enter the contact Index number to view: " << endl;
+            }
+        }
+        else{
+            cout << "Invalid contact Index." << endl;
+            print_table();
+            cout << "Please enter a valid contact Index." << endl;
+        }
     }
-    if (display_index >= 1 && display_index <= number_of_contacts){
-        display_contact(display_index);
-    }
-    else {
-        cout << "We don't have a contact matching that number" << endl;
-    }
+    display_index = 0;
 }
 
 void PhoneBook::check_truncate(string str){
@@ -100,17 +113,17 @@ void PhoneBook::check_truncate(string str){
 
 void PhoneBook::display_contact(int index){
     index--;
-    std::cout << "INDEX CARD\n";
-    std::cout << "first name: " << contacts[index].get_first_name() << std::endl;
-    std::cout << "last name: " << contacts[index].get_last_name() << std::endl;
-    std::cout << "nickname: " << contacts[index].get_nickname() << std::endl;
-    std::cout << "ph number: " << contacts[index].get_number() << std::endl;
-    std::cout << "darkest secret: " << contacts[index].get_secret() << std::endl;
+    std::cout << "\nCONTACT NO: " << index + 1 << endl;
+    std::cout << "First name: " << contacts[index].get_first_name() << std::endl;
+    std::cout << "Last name: " << contacts[index].get_last_name() << std::endl;
+    std::cout << "Nickname: " << contacts[index].get_nickname() << std::endl;
+    std::cout << "Phone number: " << contacts[index].get_number() << std::endl;
+    std::cout << "Darkest secret: " << contacts[index].get_secret() << std::endl;
 }
 
 void PhoneBook::print_table()
 {
-    cout << "|     Index|First Name| Last Name|  Nickname|" << endl;
+    cout << "\n|     Index|First Name| Last Name|  Nickname|" << endl;
     cout << "|-------------------------------------------|" << endl;
     for (int i = 0; i < number_of_contacts; i++){
         cout << "|" << std::setw(10) << std::right << i + 1 << "|";
