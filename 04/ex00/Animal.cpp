@@ -6,7 +6,7 @@
 /*   By: rmount <rmount@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:39:07 by rmount            #+#    #+#             */
-/*   Updated: 2023/09/04 15:50:47 by rmount           ###   ########.fr       */
+/*   Updated: 2023/09/04 16:37:43 by rmount           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ Animal::Animal(const Animal &copy){
 }
 
 Animal::~Animal(){
-    cout << "Animal " << this->type << "has been destroyed." << endl;
+    cout << "Animal " << this->type << " has been destroyed." << endl;
 }
 
 Animal &Animal::operator=(Animal const &copy){

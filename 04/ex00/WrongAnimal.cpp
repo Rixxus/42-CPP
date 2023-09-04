@@ -26,7 +26,7 @@ WrongAnimal::WrongAnimal(const WrongAnimal &copy){
 }
 
 WrongAnimal::~WrongAnimal(){
-    cout << "WrongAnimal " << this->type << "has been destroyed." << endl;
+    cout << "WrongAnimal " << this->type << " has been destroyed." << endl;
 }
 
 WrongAnimal &WrongAnimal::operator=(WrongAnimal const &copy){
