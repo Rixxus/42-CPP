@@ -1,37 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   WrongCat.cpp                                            :+:      :+:    :+:   */
+/*   Cat.cpp                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rmount <rmount@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:54:27 by rmount            #+#    #+#             */
-/*   Updated: 2023/09/04 16:04:59 by rmount           ###   ########.fr       */
+/*   Updated: 2023/09/08 09:56:15 by rmount           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "WrongCat.hpp"
+#include "Cat.hpp"
 
-WrongCat::WrongCat():WrongAnimal(){
-    cout << "WrongCat default constructor called." << endl;
-    this->type = "WrongCat";
+Cat::Cat():Animal(), brain(new Brain()){
+    cout << "Cat default constructor called." << endl;
+    this->type = "Cat";
 }
 
-WrongCat::~WrongCat(){
-    cout << "WrongCat has been destroyed." << endl;
+Cat::~Cat(){
+    delete this->brain;
+    cout << "Cat has been destroyed, along with its brain." << endl;
 }
 
-WrongCat::WrongCat(const WrongCat &copy):WrongAnimal(copy.type){
-    cout << "WrongCat copy constructor called." << endl;
+Cat::Cat(const Cat &copy):Animal(copy.type), brain(nullptr){
+    cout << "Cat copy constructor called." << endl;
     *this = copy;
 }
 
-WrongCat &WrongCat::operator=(const WrongCat &copy){
-    cout << "WrongCat copy assignment operator called." << endl;
+Cat &Cat::operator=(const Cat &copy){
+    cout << "Cat copy assignment operator called." << endl;
     this->type = copy.type;
+    this->brain = new Brain(*copy.brain);
     return (*this);
 }
 
-void WrongCat::makeSound() const{
-    cout << this->type << " says wrong meooooooww." << endl;
+void Cat::makeSound() const{
+    cout << this->type << " says meooooooww." << endl;
+}
+
+Brain *Cat::getBrain() const{
+    return (this->brain);
 }

@@ -6,7 +6,7 @@
 /*   By: rmount <rmount@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2023/09/04 15:27:32 by rmount            #+#    #+#             */
-/*   Updated: 2023/09/08 09:30:24 by rmount           ###   ########.fr       */
+/*   Updated: 2023/09/08 11:57:49 by rmount           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ class   Animal{
         Animal(const Animal &copy);
         virtual ~Animal();
         Animal &operator=(const Animal &copy);
-        virtual void makeSound() const;
+        virtual void makeSound() const = 0;
         string getType() const;
 };
 
